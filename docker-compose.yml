@@ -1,0 +1,6 @@
+﻿services:
+  hellocoffeeapi:
+    image: hellocoffeeapi
+    build:
+      context: .
+      dockerfile: HelloCoffeeApi/Dockerfile
