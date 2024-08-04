@@ -9,7 +9,7 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     
     [BindProperty]
-    public LinkedList<ShopItem> Items { get; set; }
+    public LinkedList<ShopItemDto> Items { get; set; }
 
     [BindProperty]
     public string[] ItemNames { get; set; }
@@ -28,7 +28,7 @@ public class IndexModel : PageModel
         };
         
         foreach (var name in ItemNames) {
-            Items.AddLast(new ShopItem
+            Items.AddLast(new ShopItemDto
             {
                 Name = name
             });

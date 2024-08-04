@@ -19,4 +19,12 @@
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Areas\Shop\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\HelloCoffeeApiClient\HelloCoffeeApiClient.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,11 +1,11 @@
 @using HelloCoffee.Areas.Shop
-<div id="shop-item-@Item.Id" data-shop-id="@Item.Id" class="card shadow-sm">
+<div id="shop-item-@ItemDto.Id" data-shop-id="@ItemDto.Id" class="card shadow-sm">
     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
 
     <div class="card-body">
-        <h5>@Item.Name</h5>
-        <p class="card-text">@Item.Description</p>
-        <h6>@Item.PriceAsCurrency</h6>
+        <h5>@ItemDto.Name</h5>
+        <p class="card-text">@ItemDto.Description</p>
+        <h6>@ItemDto.PriceAsCurrency</h6>
         <div class="d-flex justify-content-between align-items-center">
             <button type="button" class="btn btn-sm btn-primary w-100 mx-0 mt-2">Add to Basket</button>
         </div>
@@ -14,5 +14,5 @@
 
 @code {
     [Parameter]
-    public ShopItem Item { get; set; }
+    public ShopItemDto ItemDto { get; set; }
 }
