@@ -1,3 +1,5 @@
+using HelloCoffeeApiClient.Areas.Shop.Data.Type;
+
 namespace HelloCoffeeApiClient.Areas.Shop.Data;
 
 public class ShopItem

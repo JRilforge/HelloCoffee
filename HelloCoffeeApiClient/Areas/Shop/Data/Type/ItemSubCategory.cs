@@ -1,4 +1,4 @@
-namespace HelloCoffeeApiClient.Areas.Shop.Data;
+namespace HelloCoffeeApiClient.Areas.Shop.Data.Type;
 
 public enum ItemSubCategory
 {

@@ -5,25 +5,25 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace HelloCoffeeApi.Areas.Shop;
 
-public class ShopContext : DbContext
+public class BasketContext : DbContext
 {
-    public ShopContext()
+    public BasketContext()
     {
     }
 
-    public ShopContext(DbContextOptions<ShopContext> options)
+    public BasketContext(DbContextOptions<BasketContext> options)
         : base(options)
     {
     }
     
-    public DbSet<ShopItem> Items { get; set; }
+    public DbSet<CheckoutBasket> Baskets { get; set; }
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<ShopItem>()
-            .ToContainer("ShopItems")
+        builder.Entity<CheckoutBasket>()
+            .ToContainer("CheckoutBaskets")
             .HasPartitionKey(c => c.Id)
             .HasNoDiscriminator();
     }

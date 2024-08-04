@@ -4,6 +4,7 @@ public class Order
 {
     public Guid Id { get; set; }
 
-    public Dictionary<Guid, int> ItemsAndQuantities { get; set; } = new();
+    public Dictionary<Guid, BasketItem> BasketItems { get; set; } = new();
     public bool Paid { get; set; } = false;
+    public Guid UserId { get; set; }
 }

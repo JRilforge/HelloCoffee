@@ -13,6 +13,14 @@ var cosmosDatabase = "HelloCoffee";
 builder.Services.AddDbContext<ShopContext>(options =>
     options.UseCosmos(cosmosEndpoint, cosmosKey, cosmosDatabase));
 
+// Basket
+builder.Services.AddDbContext<BasketContext>(options =>
+    options.UseCosmos(cosmosEndpoint, cosmosKey, cosmosDatabase));
+
+// Basket
+builder.Services.AddDbContext<OrderContext>(options =>
+    options.UseCosmos(cosmosEndpoint, cosmosKey, cosmosDatabase));
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -35,8 +43,14 @@ app.MapControllers();
 
 using (var scope = app.Services.CreateAsyncScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
-    await dbContext.Database.EnsureCreatedAsync();
+    var shopContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
+    await shopContext.Database.EnsureCreatedAsync();
+    
+    var basketContext = scope.ServiceProvider.GetRequiredService<BasketContext>();
+    await basketContext.Database.EnsureCreatedAsync();
+    
+    var orderContext = scope.ServiceProvider.GetRequiredService<OrderContext>();
+    await orderContext.Database.EnsureCreatedAsync();
 }
 
 app.Run();
