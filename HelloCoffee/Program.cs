@@ -8,9 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // review https://medium.com/@kevinwilliams.dev/ef-core-cosmos-db-3da250b47d6c
 
 // Hide in environment variables
-var cosmosEndpoint = "<cosmosEndpoint>";
-var cosmosKey = "<cosmosKey>";
-var cosmosDatabase = "<cosmosDatabase>";
+var cosmosEndpoint = "https://cosmosrgeastuse7675b48-6e97-481f-b598db.documents.azure.com:443/";
+var cosmosKey = "b6rAUQeEjvIpczsdBmKkMMlqoxG5miQEMBniyvjr4XCV8fwkpsNOg6sU1zRFtEMSxfFjzkX4mblfACDbBi9mDQ==";
+var cosmosDatabase = "HelloCoffee";
+// mock user password: j#ZiHLwb.4Lt_#7
 
 // Identity
 builder.Services.AddDbContext<HelloCoffeeContext>(options =>
