@@ -1,0 +1,37 @@
+﻿@page
+@using System.Collections
+@using HelloCoffee.Areas.Shop
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using HelloCoffee.Pages.Components
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container-fluid">
+  <div class="row">
+    <component
+      type="typeof(MenuSidebar)"
+      render-mode="ServerPrerendered" />
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Food</h1>
+      </div>
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          @foreach (var item in Model.Items)
+          {
+            <div class="col">
+              <component 
+                type="typeof(ShopItemCard)" 
+                render-mode="ServerPrerendered"
+                param-Item="@(item)" />
+            </div>
+          }
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
