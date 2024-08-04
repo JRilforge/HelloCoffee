@@ -1,11 +1,26 @@
 using HelloCoffee.Areas.Identity.Data;
+using HelloCoffee.Areas.Shop;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HelloCoffee.Data;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("HelloCoffeeContextConnection") ?? throw new InvalidOperationException("Connection string 'HelloCoffeeContextConnection' not found.");
 
-builder.Services.AddDbContext<HelloCoffeeContext>(options => options.UseSqlServer(connectionString));
+// review https://medium.com/@kevinwilliams.dev/ef-core-cosmos-db-3da250b47d6c
+
+// Hide in environment variables
+var cosmosEndpoint = "<cosmosEndpoint>";
+var cosmosKey = "<cosmosKey>";
+var cosmosDatabase = "<cosmosDatabase>";
+
+// Identity
+builder.Services.AddDbContext<HelloCoffeeContext>(options =>
+    options.UseCosmos(cosmosEndpoint, cosmosKey, cosmosDatabase));
+
+// Inventory
+builder.Services.AddDbContext<ShopContext>(options =>
+    options.UseCosmos(cosmosEndpoint, cosmosKey, cosmosDatabase));
+
+
 
 /*
  * builder.Services.AddDbContext<CustomerDbContext>(options =>
@@ -36,5 +51,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateAsyncScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<HelloCoffeeContext>();
+    await dbContext.Database.EnsureCreatedAsync();
+}
 
 app.Run();
