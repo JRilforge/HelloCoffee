@@ -1,19 +1,30 @@
 using HelloCoffee.Areas.Shop;
 using HelloCoffeeApi.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace HelloCoffeeApi.Controller;
 
 public class CheckoutController : ControllerBase
 {
+    private BasketContext BasketContext;
+    private OrderContext OrderContext;
+    
+    public CheckoutController(BasketContext basketContext, OrderContext orderContext)
+    {
+        BasketContext = basketContext;
+        OrderContext = orderContext;
+    }
+    
     // Add Item to Basket
     [HttpPost("basket/items")]
     public async Task<bool> AddItemToBasket(AddItemToBasketRequest request)
     {
-        using (var context = new BasketContext())
+        using (var context = BasketContext)
         {
             var basket = await context.Baskets.Where(basket => basket.UserId == request.UserId).FirstOrDefaultAsync();
 
@@ -39,11 +50,18 @@ public class CheckoutController : ControllerBase
     
     // Get Basket
     [HttpGet("basket")]
-    public async Task<CheckoutBasket?> GetBasket(Guid userId)
+    public async Task<CheckoutBasketDto> GetBasket(Guid userId)
     {
-        using (var context = new BasketContext())
+        using (var context = BasketContext)
         {
-            return await context.Baskets.Where(basket => basket.UserId == userId).FirstOrDefaultAsync();
+            var basket = await context.Baskets.Where(basket => basket.UserId == userId).FirstOrDefaultAsync() ?? new CheckoutBasket();
+
+            return new CheckoutBasketDto()
+            {
+                Id = basket.Id,
+                UserId = basket.UserId,
+                Items = basket.Items
+            };
         }
     }
     
@@ -51,26 +69,25 @@ public class CheckoutController : ControllerBase
     [HttpPost("orders")]
     public async Task<bool> CreateOrder(CreateOrderRequest orderRequest)
     {
-        using (var context = new OrderContext())
+        using (var context = OrderContext)
         {
-            CheckoutBasket? basket;
+            CheckoutBasket basket;
             
-            using (var basketContext = new BasketContext())
+            using (var basketContext = BasketContext)
             {
-                basket = await basketContext.Baskets.Where(retrievedBasket => retrievedBasket.UserId == orderRequest.UserId).FirstOrDefaultAsync();
+                basket = await basketContext.Baskets.Where(retrievedBasket => 
+                    retrievedBasket.UserId == orderRequest.UserId).FirstOrDefaultAsync() ?? new CheckoutBasket();
             }
 
-            if (basket != null)
+            var addResult = await context.Orders.AddAsync(new ()
             {
-                var addResult = await context.Orders.AddAsync(new ()
-                {
-                    Id = orderRequest.Id,
-                    BasketItems = basket.Items,
-                    Paid = true
-                });
+                Id = orderRequest.Id,
+                UserId = orderRequest.UserId,
+                BasketItems = basket.Items,
+                Paid = true
+            });
                 
-                return addResult?.Entity != null;;
-            }
+            return addResult?.Entity != null;;
         }
 
         return false;
@@ -80,7 +97,7 @@ public class CheckoutController : ControllerBase
     [HttpGet("orders")]
     public async Task<List<OrderDto>> GetOrders(Guid userId)
     {
-        using (var context = new OrderContext())
+        using (var context = OrderContext)
         {
             var orders = await context.Orders.Where(order => order.UserId == userId).ToListAsync();
 

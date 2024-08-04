@@ -2,6 +2,7 @@ using HelloCoffeeApiClient.Areas.Shop.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Newtonsoft.Json;
 
 namespace HelloCoffeeApi.Areas.Shop;
 
@@ -25,7 +26,11 @@ public class BasketContext : DbContext
         builder.Entity<CheckoutBasket>()
             .ToContainer("CheckoutBaskets")
             .HasPartitionKey(c => c.Id)
-            .HasNoDiscriminator();
+            .HasNoDiscriminator()
+            .Property(b => b.Items)
+            .HasConversion(
+                v => JsonConvert.SerializeObject(v),
+                v => JsonConvert.DeserializeObject<Dictionary<Guid, BasketItem>>(v));
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

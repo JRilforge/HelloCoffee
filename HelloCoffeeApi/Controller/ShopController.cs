@@ -9,13 +9,20 @@ namespace HelloCoffeeApi.Controller;
 
 public class ShopController : ControllerBase
 {
+    private ShopContext ShopContext;
+    
+    public ShopController(ShopContext shopContext)
+    {
+        ShopContext = shopContext;
+    }
+    
     // Get Items - filtered
     [HttpGet("shop/{category}/{subCategory}")]
     public async Task<List<ShopItemDto>> GetShopItemsFor(uint category, uint subCategory)
     {
         List<ShopItem> shopItems;
         
-        using (var context = new ShopContext())
+        using (var context = ShopContext)
         {
             shopItems = await context.Items.Where(
                     e => ((int) e.Category) == category
