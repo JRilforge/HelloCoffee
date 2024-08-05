@@ -26,6 +26,10 @@ public class ShopContext : DbContext
             .ToContainer("ShopItems")
             .HasPartitionKey(c => c.Id)
             .HasNoDiscriminator();
+        
+        builder.Entity<ShopItem>()
+            .Property(o => o.Id)
+            .ToJsonProperty("id");
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

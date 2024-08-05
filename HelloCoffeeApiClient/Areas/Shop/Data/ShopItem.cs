@@ -1,15 +1,23 @@
+using System.ComponentModel.DataAnnotations;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
+using Newtonsoft.Json;
 
 namespace HelloCoffeeApiClient.Areas.Shop.Data;
 
 public class ShopItem
 {
-    public string? Id { get; set; } = Guid.NewGuid().ToString();
+    [Key]
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    [Required] 
+    public string Name { get; set; } = "";
     
-    public string Name { get; set; }
-    public string? Description { get; set; }
+    [Required]
     public double? Price { get; set; } = 0.0;
 
-    public ItemCategory Category { get; set; }
-    public ItemSubCategory SubCategory { get; set; }
+    [Required]
+    public int Category { get; set; }
+    
+    [Required]
+    public int SubCategory { get; set; }
 }

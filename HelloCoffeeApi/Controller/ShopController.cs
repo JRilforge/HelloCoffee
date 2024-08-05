@@ -1,6 +1,7 @@
 using HelloCoffee.Areas.Shop;
 using HelloCoffeeApi.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data;
+using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +39,6 @@ public class ShopController : ControllerBase
         {
             Id = item.Id,
             Name = item.Name,
-            Description = item.Description,
             Price = item.Price
         });
     }

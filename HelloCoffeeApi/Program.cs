@@ -6,10 +6,9 @@ using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// TODO Hide in environment variables
-var cosmosEndpoint = "https://cosmosrgeastuse7675b48-6e97-481f-b598db.documents.azure.com:443/";
-var cosmosKey = "b6rAUQeEjvIpczsdBmKkMMlqoxG5miQEMBniyvjr4XCV8fwkpsNOg6sU1zRFtEMSxfFjzkX4mblfACDbBi9mDQ==";
-var cosmosDatabase = "HelloCoffee";
+var cosmosEndpoint = Environment.GetEnvironmentVariable("COSMOS_ENDPOINT") ?? "";
+var cosmosKey = Environment.GetEnvironmentVariable("COSMOS_KEY") ?? "";
+var cosmosDatabase = Environment.GetEnvironmentVariable("COSMOS_DB") ?? "";
 
 // Inventory
 builder.Services.AddDbContext<ShopContext>(options =>
@@ -48,7 +47,7 @@ using (var scope = app.Services.CreateAsyncScope())
     var shopContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
     await shopContext.Database.EnsureCreatedAsync();
 
-    PersistCoffeeShopItemsIfMissing(shopContext);
+    await PersistCoffeeShopItemsIfMissing(shopContext);
     
     var basketContext = scope.ServiceProvider.GetRequiredService<BasketContext>();
     await basketContext.Database.EnsureCreatedAsync();
@@ -59,7 +58,7 @@ using (var scope = app.Services.CreateAsyncScope())
 
 app.Run();
 
-async void PersistCoffeeShopItemsIfMissing(ShopContext shopContext)
+async Task PersistCoffeeShopItemsIfMissing(ShopContext shopContext)
 {
     int itemCount = await shopContext.Items.CountAsync();
 
@@ -74,12 +73,14 @@ async void PersistCoffeeShopItemsIfMissing(ShopContext shopContext)
                 
             foreach (var item in subCategoryItemsEntry.Value)
             {
-                item.Category = category;
-                item.SubCategory = subCategory;
+                item.Category = (int) category;
+                item.SubCategory = (int) subCategory;
+                
+                items.Add(item);
             }    
         }
 
-        await shopContext.Items.AddRangeAsync();
-        
+        await shopContext.Items.AddRangeAsync(items);
+        await shopContext.SaveChangesAsync();
     }
 }

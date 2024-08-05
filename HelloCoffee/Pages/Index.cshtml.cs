@@ -1,4 +1,5 @@
 using HelloCoffee.Areas.Shop;
+using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

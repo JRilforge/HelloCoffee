@@ -6,37 +6,37 @@ public class ShopItemConstants
     {
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b942",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b942"),
             Name = "Cappuccino",
             Price = 7.00
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b943",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b943"),
             Name = "Americano",
             Price = 9.00
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b944",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b944"),
             Name = "Latte",
             Price = 6.70
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b945",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b945"),
             Name = "Mocha",
             Price = 10.50
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b946",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b946"),
             Name = "Espresso",
             Price = 7.00
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b947",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b947"),
             Name = "Macchiato",
             Price = 11.60
         }
@@ -46,19 +46,19 @@ public class ShopItemConstants
     {
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b948",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b948"),
             Name = "Green",
             Price = 5.00
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b949",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b949"),
             Name = "English",
             Price = 3.50
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b940",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b940"),
             Name = "Lemon",
             Price = 8.50
         }
@@ -68,7 +68,7 @@ public class ShopItemConstants
     {
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b950",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b950"),
             Name = "Hot Chocolate",
             Price = 10.40
         }
@@ -78,31 +78,31 @@ public class ShopItemConstants
     {
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b951",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b951"),
             Name = "Apple Juice",
             Price = 7.00
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b952",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b952"),
             Name = "Orange Juice",
             Price = 5.90
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b953",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b953"),
             Name = "Grape Juice",
             Price = 4.55
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b954",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b954"),
             Name = "Pineapple Juice",
             Price = 8.34
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b955",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b955"),
             Name = "Mango Juice",
             Price = 5.25
         }
@@ -112,31 +112,31 @@ public class ShopItemConstants
     {
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b956",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b956"),
             Name = "Still Water",
             Price = 4.00
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b957",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b957"),
             Name = "Sparkling Water",
             Price = 3.50
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b958",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b958"),
             Name = "Mineral Water",
             Price = 5.57
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b959",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b959"),
             Name = "Spring Water",
             Price = 7.65
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b960",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b960"),
             Name = "Distilled Water",
             Price = 2.87
         }
@@ -146,31 +146,31 @@ public class ShopItemConstants
     {
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b961",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b961"),
             Name = "Classic BLT",
             Price = 4.50
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b962",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b962"),
             Name = "Turkey Club",
             Price = 6.49
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b963",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b963"),
             Name = "Veggie Delight",
             Price = 3.46
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b964",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b964"),
             Name = "Pastrami Reuben",
             Price = 7.90
         },
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b965",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b965"),
             Name = "Caprese Panini",
             Price = 9.30
         }
@@ -181,21 +181,21 @@ public class ShopItemConstants
         // Pastries
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b966",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b966"),
             Name = "Choux Pastry",
             Price = 8.40
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b967",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b967"),
             Name = "Chocolate Choux Pastry",
             Price = 10.54
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b968",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b968"),
             Name = "Cream Puffs",
             Price = 5.43
         },
@@ -203,21 +203,21 @@ public class ShopItemConstants
 // Desserts
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b969",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b969"),
             Name = "Sweet Crepes (Crêpes Sucrées)",
             Price = 7.45
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b970",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b970"),
             Name = "Galettes",
             Price = 3.46
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b971",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b971"),
             Name = "Pâte Sucrée (Sweet Shortcrust Pastry)",
             Price = 7.45
         },
@@ -227,35 +227,35 @@ public class ShopItemConstants
     {
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b972",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b972"),
             Name = "Chocolate Chip Cookies",
             Price = 4.50
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b973",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b973"),
             Name = "Popcorn",
             Price = 2.30
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b974",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b974"),
             Name = "Trail Mix",
             Price = 3.90
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b975",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b975"),
             Name = "Crisps",
             Price = 0.50
         },
 
         new ShopItem()
         {
-            Id = "71a5bb26-d729-41bd-9519-5197f7d6b976",
+            Id = Guid.Parse("71a5bb26-d729-41bd-9519-5197f7d6b976"),
             Name = "Granola Bars",
             Price = 1.50
         }
