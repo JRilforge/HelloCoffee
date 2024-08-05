@@ -1,3 +1,4 @@
+@using HelloCoffeeApiClient.Areas.Shop.Data.Type
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
     <div class="position-sticky pt-3">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -7,36 +8,27 @@
             </a>
         </h6>
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/drinks/coffee">
-                    <span data-feather="home"></span>
-                    Coffee
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/drinks/tea">
-                    <span data-feather="file"></span>
-                    Tea
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/drinks/hotchocolate">
-                    <span data-feather="shopping-cart"></span>
-                    Hot Chocolate
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/drinks/juice">
-                    <span data-feather="users"></span>
-                    Juice
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/drinks/juice">
-                    <span data-feather="users"></span>
-                    Bottled Water
-                </a>
-            </li>
+            @foreach (var subCategory in drinks)
+            {
+                @if ((int)subCategory == CurrentSubCategory)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/shop/category/@((int)subCategory)">
+                            <span data-feather="home"></span>
+                            @(subCategory.ToString())
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop/category/@((int)subCategory)">
+                            <span data-feather="home"></span>
+                            @(subCategory.ToString())
+                        </a>
+                    </li>
+                }
+            }
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -46,24 +38,58 @@
             </a>
         </h6>
         <ul class="nav flex-column mb-2">
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Sandwich
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Pastry
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Snack
-                </a>
-            </li>
+            @foreach (var subCategory in food)
+            {
+                @if ((int)subCategory == CurrentSubCategory)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/shop/category/@((int)subCategory)">
+                            <span data-feather="home"></span>
+                            @(subCategory.ToString())
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop/category/@((int)subCategory)">
+                            <span data-feather="home"></span>
+                            @(subCategory.ToString())
+                        </a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </nav>
+
+@code {
+
+    [Parameter] public int CurrentSubCategory { get; set; }
+
+    private string On(int subCategory, string data)
+    {
+        return CurrentSubCategory == subCategory ? data : "";
+    }
+
+    private ItemSubCategory[] drinks =
+    {
+        ItemSubCategory.Coffee,
+        ItemSubCategory.Tea,
+        ItemSubCategory.HotChocolate,
+        ItemSubCategory.Juice,
+        ItemSubCategory.BottledWater
+    };
+
+    private ItemSubCategory[] food =
+    {
+        ItemSubCategory.Sandwich,
+        ItemSubCategory.Pastry,
+        ItemSubCategory.Snack
+    };
+
+    private class SubCategoryView
+    {
+        public ItemSubCategory SubCategory { get; set; }
+    }
+}

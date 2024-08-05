@@ -4,5 +4,5 @@ namespace HelloCoffee.Areas.Shop;
 
 public interface IShopService
 {
-    public Task<List<ShopItemDto>> GetShopItemsFor(int category, int subCategory);
+    public Task<List<ShopItemDto>> GetShopItemsFor(int subCategory);
 }

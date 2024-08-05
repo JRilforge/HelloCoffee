@@ -18,19 +18,17 @@ public class ShopController : ControllerBase
     }
     
     // Get Items - filtered
-    [HttpGet("shop/{category}/{subCategory}")]
-    public async Task<List<ShopItemDto>> GetShopItemsFor(int category, int subCategory)
+    [HttpGet("shop/category/{subCategory}")]
+    public async Task<List<ShopItemDto>> GetShopItemsFor(int subCategory)
     {
         List<ShopItem> shopItems;
         
-        using (var context = ShopContext)
+        await using (var context = ShopContext)
         {
             shopItems = await context.Items
-                .Where(e => e.Category == category && 
-                            e.SubCategory == subCategory)
+                .Where(e => e.SubCategory == subCategory)
                 .ToListAsync();
             Console.WriteLine($"{shopItems.Count} shop items found for " +
-                              $"category {((ItemCategory)category).ToString()} and " +
                               $"sub category {((ItemSubCategory)subCategory).ToString()}");
             Console.WriteLine();
         }

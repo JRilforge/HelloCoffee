@@ -1,5 +1,6 @@
 using HelloCoffee.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
+using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Azure.Cosmos.Linq;
@@ -13,10 +14,10 @@ public class IndexModel : PageModel
     private readonly IShopService _shopService;
     
     [BindProperty]
-    public LinkedList<ShopItemDto> Items { get; set; }
+    public List<ShopItemDto> Items { get; set; }
 
     [BindProperty]
-    public string[] ItemNames { get; set; }
+    public int SelectedSubCategory { get; set; }
 
     public IndexModel(ILogger<IndexModel> logger, IShopService shopService)
     {
@@ -25,30 +26,16 @@ public class IndexModel : PageModel
         _shopService = shopService;
     }
 
-    public void OnGet()
+    public async Task OnGet()
     {
-        ItemNames = new[]
-        {
-            "Drink1", "Drink2"
-        };
-        
         string[] pathSegments = Request.Path.Value?.Split("/") ?? [];
 
-        string? subCategoryString = pathSegments.Length > 0 ? pathSegments[^1] : null;
-        string? categoryString = pathSegments.Length > 1 ? pathSegments[^2] : null;
+        string? subCategoryString = pathSegments.Length > 0 ? pathSegments[^1] : "0";
 
-        int subCategory = 0, category = 0;
+        int.TryParse(subCategoryString, out var subCategory);
 
-        int.TryParse(subCategoryString, out subCategory);
-        int.TryParse(categoryString, out category);
+        SelectedSubCategory = subCategory;
         
-        //TODO ItemNames = _shopService.GetShopItemsFor(category, subCategory);
-        
-        foreach (var name in ItemNames) {
-            Items.AddLast(new ShopItemDto
-            {
-                Name = name
-            });
-        }
+        Items = await _shopService.GetShopItemsFor(subCategory);
     }
 }

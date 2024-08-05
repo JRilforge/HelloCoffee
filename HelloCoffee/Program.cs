@@ -4,7 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using HelloCoffee.Data;
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpClient();
+builder.Services.AddScoped(sp => 
+    new HttpClient
+    {
+        BaseAddress = new Uri("http://localhost:5238")
+    });
 
 builder.Services.AddScoped<IShopService, ClientShopService>();
 builder.Services.AddScoped<ICheckoutService, ClientCheckoutService>();
