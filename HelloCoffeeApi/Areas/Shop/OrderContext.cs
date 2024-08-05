@@ -31,6 +31,28 @@ public class OrderContext : DbContext
             .HasConversion(
                 v => JsonConvert.SerializeObject(v),
                 v => JsonConvert.DeserializeObject<Dictionary<Guid, BasketItem>>(v));
+        
+        builder.Entity<BasketItem>()
+            .ToContainer(nameof(BasketItem))
+            .HasPartitionKey(c => c.ItemId)
+            .HasNoDiscriminator();
+        
+        builder.Entity<Address>()
+            .ToContainer(nameof(Address))
+            .HasPartitionKey(c => c.Id)
+            .HasNoDiscriminator();
+        
+        builder.Entity<Order>()
+            .Property(o => o.Id)
+            .ToJsonProperty("id");
+        
+        builder.Entity<BasketItem>()
+            .Property(o => o.ItemId)
+            .ToJsonProperty("id");
+        
+        builder.Entity<Address>()
+            .Property(o => o.Id)
+            .ToJsonProperty("id");
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

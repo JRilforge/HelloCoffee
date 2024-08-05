@@ -14,7 +14,8 @@ public class CheckoutBasket
 
 public class BasketItem
 {
+    [Key]
     public Guid ItemId { get; set; }
     public uint UnitCount { get; set; }
-    public float UnitCost { get; set; }
+    public double UnitCost { get; set; }
 }

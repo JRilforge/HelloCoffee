@@ -13,7 +13,7 @@ public class ShopItem
     public string Name { get; set; } = "";
     
     [Required]
-    public double? Price { get; set; } = 0.0;
+    public double Price { get; set; }
 
     [Required]
     public int Category { get; set; }

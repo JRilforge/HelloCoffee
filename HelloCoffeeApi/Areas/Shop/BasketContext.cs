@@ -31,6 +31,19 @@ public class BasketContext : DbContext
             .HasConversion(
                 v => JsonConvert.SerializeObject(v),
                 v => JsonConvert.DeserializeObject<Dictionary<Guid, BasketItem>>(v));
+        
+        builder.Entity<BasketItem>()
+            .ToContainer(nameof(BasketItem))
+            .HasPartitionKey(c => c.ItemId)
+            .HasNoDiscriminator();
+        
+        builder.Entity<CheckoutBasket>()
+            .Property(o => o.Id)
+            .ToJsonProperty("id");
+        
+        builder.Entity<BasketItem>()
+            .Property(o => o.ItemId)
+            .ToJsonProperty("id");
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
