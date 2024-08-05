@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HelloCoffeeApi.Areas.Shop;
+using HelloCoffeeApiClient.Areas.Shop.Data;
+using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,12 +61,25 @@ app.Run();
 
 async void PersistCoffeeShopItemsIfMissing(ShopContext shopContext)
 {
-    
-    
     int itemCount = await shopContext.Items.CountAsync();
 
-    /*if ()
+    if (itemCount != ShopItemConstants.ItemCount)
     {
+        List<ShopItem> items = new();
         
-    }*/
+        foreach (var subCategoryItemsEntry in ShopItemConstants.SubCategoryItemsMap)
+        {
+            var subCategory = subCategoryItemsEntry.Key;
+            var category = ShopItemConstants.GetCategory(subCategory);
+                
+            foreach (var item in subCategoryItemsEntry.Value)
+            {
+                item.Category = category;
+                item.SubCategory = subCategory;
+            }    
+        }
+
+        await shopContext.Items.AddRangeAsync();
+        
+    }
 }
