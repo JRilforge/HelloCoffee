@@ -1,7 +1,13 @@
 using HelloCoffee.Areas.Identity.Data;
+using HelloCoffee.Areas.Shop;
 using Microsoft.EntityFrameworkCore;
 using HelloCoffee.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<IShopService, ClientShopService>();
+builder.Services.AddScoped<ICheckoutService, ClientCheckoutService>();
 
 // review https://medium.com/@kevinwilliams.dev/ef-core-cosmos-db-3da250b47d6c
 

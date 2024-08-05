@@ -1,5 +1,7 @@
 @page "/checkout"
+@using HelloCoffee.Areas.Shop
 @model CheckoutModel
+@inject ICheckoutService checkoutService
 @{
     ViewData["Title"] = "Checkout";
 }
