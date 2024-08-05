@@ -45,6 +45,8 @@ using (var scope = app.Services.CreateAsyncScope())
 {
     var shopContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
     await shopContext.Database.EnsureCreatedAsync();
+
+    PersistCoffeeShopItemsIfMissing(shopContext);
     
     var basketContext = scope.ServiceProvider.GetRequiredService<BasketContext>();
     await basketContext.Database.EnsureCreatedAsync();
@@ -54,3 +56,15 @@ using (var scope = app.Services.CreateAsyncScope())
 }
 
 app.Run();
+
+async void PersistCoffeeShopItemsIfMissing(ShopContext shopContext)
+{
+    
+    
+    int itemCount = await shopContext.Items.CountAsync();
+
+    /*if ()
+    {
+        
+    }*/
+}
