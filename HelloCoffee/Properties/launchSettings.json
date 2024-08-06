@@ -16,8 +16,8 @@
       "applicationUrl": "http://localhost:5128",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "COSMOS_ENDPOINT": "https://cosmosrgeastus1fa86932-68b8-418b-9e5bdb.documents.azure.com:443/",
-        "COSMOS_KEY": "NA09mxBtQ7WcOXOn1DKMPfeOckVnXSpBscI1RhEAcA7dAyzCHXaIDUYTF4ifLNRM3mt1jDPjubOJACDbfBGR4w==",
+        "COSMOS_ENDPOINT": "https://cosmosrgeastus0a4db616-2113-428d-bfa4db.documents.azure.com:443/",
+        "COSMOS_KEY": "RpxKvNy2oKGwsBI5oBgLSBc9UKCJOsVu53iqX3eXE6WDUcFofgIm6xGSc5KPLeFvKdjLpErFjJKaACDbZfDODg==",
         "COSMOS_DB": "HelloCoffee"
       }
     },

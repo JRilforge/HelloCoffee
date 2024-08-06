@@ -6,7 +6,7 @@ public class CreateOrderRequest
 
     public string FirstName { get; set; } = "";
     public string LastName { get; set; } = "";
-    public Address? Address { get; set; }
+    public Address Address { get; set; } = new();
 
     public string CardNumber { get; set; } = "";
     public string NameOnCard { get; set; } = "";

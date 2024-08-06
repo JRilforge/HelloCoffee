@@ -94,7 +94,10 @@ public class CheckoutController : ControllerBase
         await using (var basketContext = _basketContext)
         {
             basket = await basketContext.Baskets.Where(retrievedBasket => 
-                retrievedBasket.UserId == orderRequest.UserId).FirstOrDefaultAsync() ?? new CheckoutBasket();
+                retrievedBasket.UserId == orderRequest.UserId).FirstOrDefaultAsync() ?? new CheckoutBasket()
+            {
+                UserId = orderRequest.UserId
+            };
         }
 
         var addResult = await context.Orders.AddAsync(new ()
@@ -103,10 +106,11 @@ public class CheckoutController : ControllerBase
             UserId = orderRequest.UserId,
             FirstName = orderRequest.FirstName,
             LastName = orderRequest.LastName,
-            Address = orderRequest.Address,
+            DeliveryAddress = orderRequest.Address,
             BasketItems = basket.Items,
             Paid = true
         });
+        await context.SaveChangesAsync();
                 
         return addResult?.Entity != null;;
     }

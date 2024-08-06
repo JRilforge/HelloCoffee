@@ -8,7 +8,7 @@ public interface ICheckoutService
     public Task<bool> AddItemToBasket(AddItemToBasketRequest request);
     
     public Task<CheckoutBasketDto> GetBasket(Guid userId);
-
+    
     public Task<bool> CreateOrder(CreateOrderRequest orderRequest);
 
     public Task<List<OrderDto>> GetOrders(Guid userId);
