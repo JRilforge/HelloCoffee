@@ -78,6 +78,14 @@ public class CheckoutControllerIntegrationTests : PlaywrightTest
     public async Task CreateOrder_Creates_TheRequestedOver()
     {
         var userId = Guid.NewGuid();
+        
+        await request.PostAsync("/basket/items", new() {
+            DataObject = new AddItemToBasketRequest()
+            {
+                ItemId = ShopItemConstants.Coffee[0].Id,
+                UserId = userId,
+                UnitCountModification = 1
+            }});
 
         var requestPayload = new CreateOrderRequest()
         {
