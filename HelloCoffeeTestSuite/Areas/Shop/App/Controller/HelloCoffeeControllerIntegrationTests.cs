@@ -1,9 +1,8 @@
-using HelloCoffee.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using Microsoft.Playwright;
 
-namespace HelloCoffeeTestSuite.Areas.Shop.App;
+namespace HelloCoffeeTestSuite.Areas.Shop.App.Controller;
 
 // https://playwright.dev/dotnet/docs/api-testing
 
@@ -27,13 +26,13 @@ public class HelloCoffeeControllerIntegrationTests : PlaywrightTest
 
         request = await Playwright.APIRequest.NewContextAsync(new() {
             // All requests we send go to this API endpoint.
-            BaseURL = "http://localhost:5128",
+            BaseURL = TestUtils.HelloCoffeeAppEndpoint,
             ExtraHTTPHeaders = headers,
         });
         
         apiRequest = await Playwright.APIRequest.NewContextAsync(new() {
             // All requests we send go to this API endpoint.
-            BaseURL = "http://localhost:5238",
+            BaseURL = TestUtils.HelloCoffeeApiEndpoint,
             ExtraHTTPHeaders = headers,
         });
     }
@@ -86,6 +85,4 @@ public class HelloCoffeeControllerIntegrationTests : PlaywrightTest
         await request.DisposeAsync();
         await apiRequest.DisposeAsync();
     }
-    
-    // for later - NavigationToRootPath_Shows_HomePage
 }

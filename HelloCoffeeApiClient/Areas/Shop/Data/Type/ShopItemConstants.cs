@@ -273,6 +273,9 @@ public class ShopItemConstants
         { ItemSubCategory.Snack, Snack }
     };
 
+    public static readonly Dictionary<Guid, ShopItem> ItemMap = SubCategoryItemsMap.Values.SelectMany(i => i)
+        .ToDictionary(x => x.Id, x => x);
+
     public static ItemCategory GetCategory(ItemSubCategory source)
     {
         return ((int) source < 5 ? ItemCategory.Drink : ItemCategory.Food);

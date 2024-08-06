@@ -1,10 +1,14 @@
 ﻿@page "/{shop?}/{category?}/{subCategory?}"
+@using HelloCoffee.Areas.Identity.Data
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using HelloCoffee.Pages.Components
+@using HelloCoffeeApiClient.Areas.Shop.Data.Type
+@using Microsoft.AspNetCore.Identity
 @model IndexModel
+@inject UserManager<HelloCoffeeUser> userManager
 
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
 <div class="container-fluid">
@@ -16,7 +20,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Food</h1>
+        <h1 id="sub-category-heading" class="h2">@(((ItemSubCategory) Model.SelectedSubCategory).ToString())</h1>
       </div>
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -26,7 +30,9 @@
               <component 
                 type="typeof(ShopItemCard)" 
                 render-mode="ServerPrerendered"
-                param-ItemDto="@(item)" />
+                param-ItemDto="@(item)"
+                param-UserId="@(userManager.GetUserId(User))"
+                param-ThisItemCount="@(Model.GetBasketItemUnitCount(item.Id))"/>
             </div>
           }
         </div>

@@ -1,6 +1,9 @@
+using HelloCoffee.Areas.Identity.Data;
 using HelloCoffee.Areas.Shop;
+using HelloCoffeeApiClient.Areas.Shop.Data;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Azure.Cosmos.Linq;
@@ -12,6 +15,14 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
 
     private readonly IShopService _shopService;
+
+    private readonly ICheckoutService _checkoutService;
+
+    private readonly UserManager<HelloCoffeeUser> _userManager;
+
+    private readonly SignInManager<HelloCoffeeUser> _signInManager;
+
+    private Dictionary<Guid, BasketItem> _basketItems { get; set; } = new();
     
     [BindProperty]
     public List<ShopItemDto> Items { get; set; }
@@ -19,11 +30,21 @@ public class IndexModel : PageModel
     [BindProperty]
     public int SelectedSubCategory { get; set; }
 
-    public IndexModel(ILogger<IndexModel> logger, IShopService shopService)
+    [BindProperty]
+    public int BasketItemCount { get; set; }
+
+    public IndexModel(ILogger<IndexModel> logger, 
+        IShopService shopService, 
+        ICheckoutService checkoutService,
+        UserManager<HelloCoffeeUser> userManager,
+        SignInManager<HelloCoffeeUser> signInManager)
     {
         _logger = logger;
         Items = new();
         _shopService = shopService;
+        _checkoutService = checkoutService;
+        _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     public async Task OnGet()
@@ -37,5 +58,26 @@ public class IndexModel : PageModel
         SelectedSubCategory = subCategory;
         
         Items = await _shopService.GetShopItemsFor(subCategory);
+
+        if (_signInManager.IsSignedIn(User))
+        {
+            var userId = _userManager.GetUserId(User);
+                
+            var basket = await _checkoutService.GetBasket(Guid.Parse(userId ?? ""));
+
+            _basketItems = basket.Items;
+
+            foreach (var item in _basketItems)
+            {
+                BasketItemCount += item.Value.UnitCount;
+            }
+        }
+    }
+
+    public int GetBasketItemUnitCount(Guid id)
+    {
+        _basketItems.TryGetValue(id, out var item);
+
+        return item?.UnitCount ?? 0;
     }
 }

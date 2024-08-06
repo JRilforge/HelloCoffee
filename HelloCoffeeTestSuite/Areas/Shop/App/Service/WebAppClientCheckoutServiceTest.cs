@@ -4,7 +4,7 @@ using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using SoloX.CodeQuality.Test.Helpers.Http;
 
-namespace HelloCoffeeTestSuite.Areas.Shop.App;
+namespace HelloCoffeeTestSuite.Areas.Shop.App.Service;
 
 // https://medium.com/younited-tech-blog/easy-httpclient-mocking-3395d0e5c4fa
 

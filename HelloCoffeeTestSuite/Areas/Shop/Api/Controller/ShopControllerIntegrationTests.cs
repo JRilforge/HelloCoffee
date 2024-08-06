@@ -1,10 +1,9 @@
-using System.Text.Json;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using Microsoft.Playwright;
 using Newtonsoft.Json;
 
-namespace HelloCoffeeTestSuite.Areas.Shop.Api;
+namespace HelloCoffeeTestSuite.Areas.Shop.Api.Controller;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
@@ -25,7 +24,7 @@ public class ShopControllerIntegrationTests : PlaywrightTest
 
         request = await Playwright.APIRequest.NewContextAsync(new() {
             // All requests we send go to this API endpoint.
-            BaseURL = "http://localhost:5238",
+            BaseURL = TestUtils.HelloCoffeeApiEndpoint,
             ExtraHTTPHeaders = headers,
         });
     }

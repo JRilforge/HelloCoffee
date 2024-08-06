@@ -1,5 +1,4 @@
 using System.Net;
-using HelloCoffee.Areas.Shop;
 using HelloCoffeeApi.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
@@ -53,6 +52,12 @@ public class CheckoutController : ControllerBase
         }
                 
         basket.Items[request.ItemId].UnitCount += request.UnitCountModification;
+
+        // Remove basket item if is 0 or less
+        if (basket.Items[request.ItemId].UnitCount <= 0)
+        {
+            basket.Items.Remove(request.ItemId);
+        }
 
         if (basket.Id == Guid.Empty)
         {

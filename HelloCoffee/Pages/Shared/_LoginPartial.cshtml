@@ -11,8 +11,8 @@
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
     </li>
     <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" asp-page="/Checkout">
-            <i class="fa-solid fa-basket-shopping"></i> Basket <span class="badge bg-secondary">0</span>
+        <a id="checkout-basket-link" class="nav-link px-3" asp-page="/Checkout">
+            <i class="fa-solid fa-basket-shopping"></i> Basket <span class="badge bg-secondary">@(Model.BasketItemCount)</span>
         </a>
     </div>
     <li class="nav-item">

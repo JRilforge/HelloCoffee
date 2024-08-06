@@ -13,10 +13,20 @@ public class HelloCoffeeController : ControllerBase
     }
 
     [Route("orders", Name = "createOrder")]
-    public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+    [HttpPost]
+    public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
     {
         await _checkoutService.CreateOrder(request);
 
         return Redirect("OrderComplete");
+    }
+
+    [Route("basket/items", Name = "modifyBasket")]
+    [HttpPost]
+    public async Task<IActionResult> AddItemToBasket(AddItemToBasketRequest request)
+    {
+        await _checkoutService.AddItemToBasket(request);
+
+        return Redirect("Index");
     }
 }

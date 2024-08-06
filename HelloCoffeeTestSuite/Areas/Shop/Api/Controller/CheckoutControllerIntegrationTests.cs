@@ -1,11 +1,9 @@
-using System.Text.Json;
 using HelloCoffee.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using Microsoft.Playwright;
-using Newtonsoft.Json;
 
-namespace HelloCoffeeTestSuite.Areas.Shop.Api;
+namespace HelloCoffeeTestSuite.Areas.Shop.Api.Controller;
 
 // https://playwright.dev/dotnet/docs/api-testing
 
@@ -28,7 +26,7 @@ public class CheckoutControllerIntegrationTests : PlaywrightTest
 
         request = await Playwright.APIRequest.NewContextAsync(new() {
             // All requests we send go to this API endpoint.
-            BaseURL = "http://localhost:5238",
+            BaseURL = TestUtils.HelloCoffeeApiEndpoint,
             ExtraHTTPHeaders = headers,
         });
     }
@@ -72,6 +70,42 @@ public class CheckoutControllerIntegrationTests : PlaywrightTest
         Assert.That(basketItem.ItemId, Is.EqualTo(expectedItemInBasket.Id));
         Assert.That(basketItem.UnitCost, Is.EqualTo(expectedItemInBasket.Price));
         Assert.That(basketItem.UnitCount, Is.EqualTo(1));
+    }
+    
+    [Test]
+    public async Task AddNegativeNumberOfItemsToBasket_Should_RemoveTheBasketItem()
+    {
+        var userId = Guid.NewGuid();
+
+        var expectedItemInBasket = ShopItemConstants.Coffee[0];
+        
+        var response = await request.PostAsync("/basket/items", new() {
+            DataObject = new AddItemToBasketRequest()
+            {
+                ItemId = ShopItemConstants.Coffee[0].Id,
+                UserId = userId,
+                UnitCountModification = 1
+            }});
+        await Expect(response).ToBeOKAsync();
+        
+        var basketResponse = await request.GetAsync($"/basket?userId={userId}");
+        await Expect(basketResponse).ToBeOKAsync();
+        
+        var basketResult = await basketResponse.TextAsync();
+
+        var basket = basketResult.ToType<CheckoutBasketDto>();
+        
+        Assert.NotNull(basket);
+        Assert.That(basket.Items.Count, Is.EqualTo(1));
+
+        response = await request.PostAsync("/basket/items", new() {
+            DataObject = new AddItemToBasketRequest()
+            {
+                ItemId = ShopItemConstants.Coffee[0].Id,
+                UserId = userId,
+                UnitCountModification = -2
+            }});
+        await Expect(response).ToBeOKAsync();
     }
     
     [Test]

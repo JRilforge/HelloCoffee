@@ -1,4 +1,3 @@
-using HelloCoffee.Areas.Shop;
 using HelloCoffeeApi.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;

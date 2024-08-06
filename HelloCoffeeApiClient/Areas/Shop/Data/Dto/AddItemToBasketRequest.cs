@@ -9,5 +9,5 @@ public class AddItemToBasketRequest
     [JsonProperty("itemId")]
     public Guid ItemId { get; set; }
     [JsonProperty("unitCountModificationId")]
-    public uint UnitCountModification { get; set; }
+    public int UnitCountModification { get; set; }
 }

@@ -1,12 +1,10 @@
 using HelloCoffee.Areas.Shop;
 using HelloCoffee.Areas.Shop.Controller;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
-using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using SoloX.CodeQuality.Test.Helpers.Http;
 
-namespace HelloCoffeeTestSuite.Areas.Shop;
+namespace HelloCoffeeTestSuite.Areas.Shop.App.Controller;
 
 [TestFixture]
 public class HelloCoffeeControllerTest

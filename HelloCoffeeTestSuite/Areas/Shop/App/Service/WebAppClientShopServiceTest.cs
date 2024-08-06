@@ -1,12 +1,10 @@
 using HelloCoffee.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
-using Moq;
-using Moq.Protected;
 using Newtonsoft.Json;
 using SoloX.CodeQuality.Test.Helpers.Http;
 
-namespace HelloCoffeeTestSuite.Areas.Shop;
+namespace HelloCoffeeTestSuite.Areas.Shop.App.Service;
 
 [TestFixture]
 public class WebAppClientShopServiceTest
