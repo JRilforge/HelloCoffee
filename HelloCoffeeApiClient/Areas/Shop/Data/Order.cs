@@ -10,6 +10,8 @@ public class Order
 
     public Dictionary<Guid, BasketItem> BasketItems { get; set; } = new();
     public bool Paid { get; set; }
+    
+    public double TotalPrice { get; set; }
 
     public Address DeliveryAddress { get; set; } = new ();
 }

@@ -13,7 +13,7 @@ public class HelloCoffeeController : ControllerBase
     }
 
     [Route("orders", Name = "createOrder")]
-    public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
+    public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
     {
         await _checkoutService.CreateOrder(request);
 

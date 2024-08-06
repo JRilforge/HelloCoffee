@@ -6,5 +6,10 @@
     &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.WebAppClientCheckoutServiceTest.AddItemToBasket_Adds_TheRequestedItemToTheBasket&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.WebAppClientCheckoutServiceTest.GetBasket_Gets_TheBasketForTheCurrentUser&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.WebAppClientCheckoutServiceTest.GetOrders_Gets_AllOrdersForThisUser&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.HelloCoffeeControllerTest.AddItemToBasket_Adds_TheRequestedItemToTheBasket&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.ShopControllerIntegrationTests.GetShopItemsFor_Retrieves_AllCoffeeItems&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.CheckoutControllerIntegrationTests.AddItemToBasket_Adds_TheRequestedItemToTheBasket&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.CheckoutControllerIntegrationTests.CreateOrder_Creates_TheRequestedOver&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.CheckoutControllerIntegrationTests.PopulatingTheBasket_ThenOrdering_ShouldClearTheBasket&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

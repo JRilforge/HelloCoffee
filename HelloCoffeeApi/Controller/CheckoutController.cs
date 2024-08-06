@@ -1,3 +1,4 @@
+using System.Net;
 using HelloCoffee.Areas.Shop;
 using HelloCoffeeApi.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data;
@@ -25,7 +26,7 @@ public class CheckoutController : ControllerBase
     
     // Add Item to Basket
     [HttpPost("basket/items")]
-    public async Task<IActionResult> AddItemToBasket(AddItemToBasketRequest request)
+    public async Task<IActionResult> AddItemToBasket([FromBody] AddItemToBasketRequest request)
     {
         await using var context = _basketContext;
         
@@ -64,7 +65,7 @@ public class CheckoutController : ControllerBase
             
         var updateCount = await context.SaveChangesAsync(true);
 
-        return Ok(updateCount > 0 ? "Added" : "Wasn't Added");
+        return Ok(updateCount > 0);
     }
     
     // Get Basket
@@ -85,19 +86,26 @@ public class CheckoutController : ControllerBase
     
     // Create Order
     [HttpPost("orders")]
-    public async Task<bool> CreateOrder(CreateOrderRequest orderRequest)
+    public async Task<bool> CreateOrder([FromBody] CreateOrderRequest orderRequest)
     {
         await using var context = _orderContext;
+        await using var basketContext = _basketContext;
         
-        CheckoutBasket basket;
-            
-        await using (var basketContext = _basketContext)
+        CheckoutBasket? basket = await basketContext.Baskets.Where(retrievedBasket =>
+            retrievedBasket.UserId == orderRequest.UserId).FirstOrDefaultAsync();
+
+        if (basket == null || basket.Items.Count == 0)
         {
-            basket = await basketContext.Baskets.Where(retrievedBasket => 
-                retrievedBasket.UserId == orderRequest.UserId).FirstOrDefaultAsync() ?? new CheckoutBasket()
-            {
-                UserId = orderRequest.UserId
-            };
+            HttpContext.Response.StatusCode = (int) HttpStatusCode.BadRequest;
+                
+            return false;
+        }
+
+        var totalPrice = 0.0;
+
+        foreach (var basketItem in basket.Items.Values)
+        {
+            totalPrice += basketItem.UnitCost * basketItem.UnitCount;
         }
 
         var addResult = await context.Orders.AddAsync(new ()
@@ -108,9 +116,14 @@ public class CheckoutController : ControllerBase
             LastName = orderRequest.LastName,
             DeliveryAddress = orderRequest.Address,
             BasketItems = basket.Items,
-            Paid = true
+            Paid = true,
+            TotalPrice = totalPrice
         });
         await context.SaveChangesAsync();
+        
+        basket.Items.Clear();
+        basketContext.Update(basket);
+        await basketContext.SaveChangesAsync();
                 
         return addResult?.Entity != null;;
     }

@@ -1,11 +1,12 @@
-using System.Net;
 using HelloCoffee.Areas.Shop;
 using HelloCoffeeApiClient.Areas.Shop.Data;
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using SoloX.CodeQuality.Test.Helpers.Http;
 
-namespace HelloCoffeeTestSuite.Areas.Shop;
+namespace HelloCoffeeTestSuite.Areas.Shop.App;
+
+// https://medium.com/younited-tech-blog/easy-httpclient-mocking-3395d0e5c4fa
 
 [TestFixture]
 public class WebAppClientCheckoutServiceTest
@@ -127,8 +128,6 @@ public class WebAppClientCheckoutServiceTest
         Assert.That(actualItemInBasket.UnitCost, Is.EqualTo(expectedItemInBasket.Price));
         Assert.That(actualItemInBasket.UnitCount, Is.EqualTo(1));
     }
-    
-    
     
     [Test]
     public async Task GetOrders_Gets_AllOrdersForThisUser()
