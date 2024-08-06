@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloCoffeeApiClient", "HelloCoffeeApiClient\HelloCoffeeApiClient.csproj", "{0F5B17F5-2D3E-4906-8B50-283ADF9DD226}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloCoffeeTestSuite", "HelloCoffeeTestSuite\HelloCoffeeTestSuite.csproj", "{0DC07DD3-900C-4533-B2A4-5F44CFCE539F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +31,9 @@ Global
 		{0F5B17F5-2D3E-4906-8B50-283ADF9DD226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F5B17F5-2D3E-4906-8B50-283ADF9DD226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F5B17F5-2D3E-4906-8B50-283ADF9DD226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC07DD3-900C-4533-B2A4-5F44CFCE539F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC07DD3-900C-4533-B2A4-5F44CFCE539F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC07DD3-900C-4533-B2A4-5F44CFCE539F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC07DD3-900C-4533-B2A4-5F44CFCE539F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

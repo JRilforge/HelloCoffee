@@ -1,6 +1,4 @@
-using HelloCoffeeApiClient.Areas.Shop.Data;
-
-namespace HelloCoffee.Areas.Shop;
+namespace HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 
 public class OrderDto
 {
