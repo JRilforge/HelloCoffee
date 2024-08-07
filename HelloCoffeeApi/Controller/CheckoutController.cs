@@ -90,7 +90,7 @@ public class CheckoutController : ControllerBase
     }
     
     // Clear Basket
-    [HttpDelete("basket")]
+    [HttpDelete("basket/items")]
     public async Task<bool> ClearBasket(Guid userId)
     {
         await using var context = _basketContext;

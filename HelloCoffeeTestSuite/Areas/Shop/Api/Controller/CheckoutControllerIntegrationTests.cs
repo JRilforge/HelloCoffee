@@ -312,7 +312,7 @@ public class CheckoutControllerIntegrationTests : PlaywrightTest
         
         // Clear the basket
         
-        var response = await request.DeleteAsync($"/basket?user{userId}=");
+        var response = await request.DeleteAsync($"/basket/items?userId={userId}");
         await Expect(response).ToBeOKAsync();
         
         // Check the basket is now empty

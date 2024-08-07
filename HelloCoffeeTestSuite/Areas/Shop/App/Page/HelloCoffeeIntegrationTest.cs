@@ -86,10 +86,6 @@ public class HelloCoffeeIntegrationUnitTests : PageTest
         var shopItemUnitCountView = Page.Locator(".shop-item-unit-count").First;
         
         await Expect(shopItemUnitCountView).ToHaveValueAsync("1");
-
-        var checkoutBasketLink = Page.Locator("#checkout-basket-link");
-
-        await checkoutBasketLink.ClickAsync();
     }
     
     [Test]
@@ -100,9 +96,9 @@ public class HelloCoffeeIntegrationUnitTests : PageTest
         
         // remove item from the basket
         
-        var addToBasketBtn = Page.Locator(".remove-shop-item-from-basket-btn").First;
+        var removeFromBasketBtn = Page.Locator(".remove-shop-item-from-basket-btn").First;
 
-        await addToBasketBtn.ClickAsync();
+        await removeFromBasketBtn.ClickAsync();
 
         await Page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
         
@@ -139,11 +135,11 @@ public class HelloCoffeeIntegrationUnitTests : PageTest
 
         var basketItemUnitCount = Page.Locator(".basket-item-unit-count").First;
 
-        await Expect(basketItemUnitCount).ToHaveValueAsync("Quantity: 1");
+        await Expect(basketItemUnitCount).ToHaveTextAsync("Quantity: 1");
 
         var basketItemTotalCost = Page.Locator(".basket-item-total-cost").First;
 
-        await Expect(basketItemTotalCost).ToHaveValueAsync($"{ShopItemConstants.Coffee[0].Price:c}");
+        await Expect(basketItemTotalCost).ToHaveTextAsync($"{ShopItemConstants.Coffee[0].Price:c}");
 
         var completeOrderBtn = Page.Locator("text=Complete Order");
         
@@ -168,7 +164,7 @@ public class HelloCoffeeIntegrationUnitTests : PageTest
     {
         await Page.GotoAsync($"{TestUtils.HelloCoffeeAppEndpoint}/Identity/Account/Login");
         
-        // If using JetBrains Rider set environment variable in Settings > Unit Testing
+        // If using JetBrains Rider set environment variable in Settings > Unit Testing > Test Runner
         
         string password = Environment.GetEnvironmentVariable("PLAYWRIGHT_USER_PASSWORD") ?? 
                           throw new Exception("Please populated the 'PLAYWRIGHT_USER_PASSWORD' environment variable");
@@ -181,6 +177,10 @@ public class HelloCoffeeIntegrationUnitTests : PageTest
         await Page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
 
         await Expect(Page).ToHaveURLAsync(TestUtils.HelloCoffeeAppEndpoint + "/");
+        
+        // Clean up the basket
+
+        await CleanUpBasket();
     }
 
     private async Task CleanUpBasket()
@@ -209,8 +209,18 @@ public class HelloCoffeeIntegrationUnitTests : PageTest
                 ExtraHTTPHeaders = headers,
             });
         
-            var response = await apiRequest.DeleteAsync($"/basket?user{userId}=");
+            var response = await apiRequest.DeleteAsync($"/basket/items?userId={userId}");
             await Expect(response).ToBeOKAsync();
+
+            await apiRequest.DisposeAsync();
+
+            // To reflect change on the api side
+            
+            await Page.ReloadAsync();
+            
+            await Page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+            
+            await Expect(Page).ToHaveURLAsync(TestUtils.HelloCoffeeAppEndpoint + "/");
         }
     }
 }

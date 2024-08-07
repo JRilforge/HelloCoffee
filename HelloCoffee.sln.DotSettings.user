@@ -1,16 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/rilforge/Library/Caches/JetBrains/Rider2024.1/resharper-host/temp/Rider/vAny/CoverageData/_HelloCoffee.-1257141665/Snapshot/snapshot.utdcvr</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e2902697_002D60ce_002D449f_002Da255_002D9f72663e1038/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetShopItemsFor_Retrieves_AllCoffeeItems" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.WebAppClientCheckoutServiceTest.CreateOrder_Creates_TheRequestedOver&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.WebAppClientCheckoutServiceTest.AddItemToBasket_Adds_TheRequestedItemToTheBasket&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.WebAppClientCheckoutServiceTest.GetBasket_Gets_TheBasketForTheCurrentUser&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.WebAppClientCheckoutServiceTest.GetOrders_Gets_AllOrdersForThisUser&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.HelloCoffeeControllerTest.AddItemToBasket_Adds_TheRequestedItemToTheBasket&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.ShopControllerIntegrationTests.GetShopItemsFor_Retrieves_AllCoffeeItems&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.CheckoutControllerIntegrationTests.AddItemToBasket_Adds_TheRequestedItemToTheBasket&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.CheckoutControllerIntegrationTests.CreateOrder_Creates_TheRequestedOver&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.Api.CheckoutControllerIntegrationTests.PopulatingTheBasket_ThenOrdering_ShouldClearTheBasket&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0DC07DD3-900C-4533-B2A4-5F44CFCE539F::net8.0::HelloCoffeeTestSuite.Areas.Shop.App.HelloCoffeeControllerIntegrationTests.CreateOrder_Creates_TheRequestedOver&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+  &lt;ProjectFolder&gt;0DC07DD3-900C-4533-B2A4-5F44CFCE539F/d:Areas/d:Shop&lt;/ProjectFolder&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=DOTNET_005FENVIRONMENT/@EntryIndexRemoved">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=PLAYWRIGHT_005FUSER_005FPASSWORD/@EntryIndexedValue">Abc!23</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=RESHARPER_005FHOST_005FVERSION/@EntryIndexRemoved">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=RESHARPER_005FHOST/@EntryIndexRemoved">True</s:Boolean></wpf:ResourceDictionary>
