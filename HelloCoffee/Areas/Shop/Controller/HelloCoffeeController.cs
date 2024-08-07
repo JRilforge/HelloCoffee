@@ -1,4 +1,5 @@
 using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
+using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelloCoffee.Areas.Shop.Controller;
@@ -27,6 +28,8 @@ public class HelloCoffeeController : ControllerBase
     {
         await _checkoutService.AddItemToBasket(request);
 
-        return Redirect("Index");
+        ShopItemConstants.ItemMap.TryGetValue(request.ItemId, out var item);
+
+        return Redirect($"/shop/category/{item?.SubCategory ?? 0}");
     }
 }

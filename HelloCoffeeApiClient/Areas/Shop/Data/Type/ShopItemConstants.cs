@@ -273,6 +273,21 @@ public class ShopItemConstants
         { ItemSubCategory.Snack, Snack }
     };
 
+    static ShopItemConstants()
+    {
+        foreach (var subCategoryItemsEntry in ShopItemConstants.SubCategoryItemsMap)
+        {
+            var subCategory = subCategoryItemsEntry.Key;
+            var category = GetCategory(subCategory);
+                
+            foreach (var item in subCategoryItemsEntry.Value)
+            {
+                item.Category = (int) category;
+                item.SubCategory = (int) subCategory;
+            }    
+        }
+    }
+
     public static readonly Dictionary<Guid, ShopItem> ItemMap = SubCategoryItemsMap.Values.SelectMany(i => i)
         .ToDictionary(x => x.Id, x => x);
 
