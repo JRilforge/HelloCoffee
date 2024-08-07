@@ -6,9 +6,12 @@ using HelloCoffeeApiClient.Areas.Shop.Data.Type;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var cosmosEndpoint = Environment.GetEnvironmentVariable("COSMOS_ENDPOINT") ?? "";
-var cosmosKey = Environment.GetEnvironmentVariable("COSMOS_KEY") ?? "";
-var cosmosDatabase = Environment.GetEnvironmentVariable("COSMOS_DB") ?? "";
+var cosmosEndpoint = Environment.GetEnvironmentVariable("COSMOS_ENDPOINT") ?? 
+                     throw new Exception("Please populated the 'COSMOS_ENDPOINT' environment variable");
+var cosmosKey = Environment.GetEnvironmentVariable("COSMOS_KEY") ?? 
+                throw new Exception("Please populated the 'COSMOS_KEY' environment variable");
+var cosmosDatabase = Environment.GetEnvironmentVariable("COSMOS_DB") ?? 
+                     throw new Exception("Please populated the 'COSMOS_DB' environment variable");
 
 // Inventory
 builder.Services.AddDbContext<ShopContext>(options =>

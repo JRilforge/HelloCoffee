@@ -258,6 +258,75 @@ public class CheckoutControllerIntegrationTests : PlaywrightTest
         Assert.NotNull(afterBasket);
         Assert.That(afterBasket.Items.Count, Is.EqualTo(0));
     }
+    
+    [Test]
+    public async Task PopulatingTheBasket_ThenClearBasket_ShouldClearTheBasket()
+    {
+        var userId = Guid.NewGuid();
+        
+        await request.PostAsync("/basket/items", new() {
+            DataObject = new AddItemToBasketRequest()
+            {
+                ItemId = ShopItemConstants.Juice[0].Id,
+                UserId = userId,
+                UnitCountModification = 1
+            }});
+        await request.PostAsync("/basket/items", new() {
+            DataObject = new AddItemToBasketRequest()
+            {
+                ItemId = ShopItemConstants.Sandwich[0].Id,
+                UserId = userId,
+                UnitCountModification = 2
+            }});
+        await request.PostAsync("/basket/items", new() {
+            DataObject = new AddItemToBasketRequest()
+            {
+                ItemId = ShopItemConstants.Snack[0].Id,
+                UserId = userId,
+                UnitCountModification = 4
+            }});
+        
+        // Check the basket for these items
+        
+        var basketResponse = await request.GetAsync($"/basket?userId={userId}");
+        await Expect(basketResponse).ToBeOKAsync();
+        
+        var basketResult = await basketResponse.TextAsync();
+
+        var basket = basketResult.ToType<CheckoutBasketDto>();
+        
+        Assert.NotNull(basket);
+        Assert.That(basket.Items.Count, Is.EqualTo(3));
+
+        var juiceItem = basket.Items[ShopItemConstants.Juice[0].Id];
+        Assert.NotNull(juiceItem);
+        Assert.That(juiceItem.UnitCount, Is.EqualTo(1));
+
+        var sandwichItem = basket.Items[ShopItemConstants.Sandwich[0].Id];
+        Assert.NotNull(sandwichItem);
+        Assert.That(sandwichItem.UnitCount, Is.EqualTo(2));
+
+        var snackItem = basket.Items[ShopItemConstants.Snack[0].Id];
+        Assert.NotNull(snackItem);
+        Assert.That(snackItem.UnitCount, Is.EqualTo(4));
+        
+        // Clear the basket
+        
+        var response = await request.DeleteAsync($"/basket?user{userId}=");
+        await Expect(response).ToBeOKAsync();
+        
+        // Check the basket is now empty
+        
+        var afterBasketResponse = await request.GetAsync($"/basket?userId={userId}");
+        await Expect(afterBasketResponse).ToBeOKAsync();
+        
+        var afterBasketResult = await afterBasketResponse.TextAsync();
+
+        var afterBasket = afterBasketResult.ToType<CheckoutBasketDto>();
+        
+        Assert.NotNull(afterBasket);
+        Assert.That(afterBasket.Items.Count, Is.EqualTo(0));
+    }
 
     [TearDown]
     public async Task TearDownApiTesting()

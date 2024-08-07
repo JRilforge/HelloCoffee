@@ -89,6 +89,27 @@ public class CheckoutController : ControllerBase
         };
     }
     
+    // Clear Basket
+    [HttpDelete("basket")]
+    public async Task<bool> ClearBasket(Guid userId)
+    {
+        await using var context = _basketContext;
+        
+        CheckoutBasket? basket = await context.Baskets.Where(retrievedBasket =>
+            retrievedBasket.UserId == userId).FirstOrDefaultAsync();
+
+        if (basket != null)
+        {
+            basket.Items.Clear();
+            context.Update(basket);
+            var updateCount = await context.SaveChangesAsync();
+
+            return updateCount > 0;
+        }
+
+        return false;
+    }
+    
     // Create Order
     [HttpPost("orders")]
     public async Task<bool> CreateOrder([FromBody] CreateOrderRequest orderRequest)

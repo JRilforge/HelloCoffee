@@ -24,17 +24,17 @@
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Your cart</span>
-                    <span class="badge bg-primary rounded-pill">@Model.BasketItemCount</span>
+                    <span class="text-primary">Your Basket</span>
+                    <span id="basket-items-total-count" class="badge bg-primary rounded-pill">@Model.BasketItemCount</span>
                 </h4>
                 <ul class="list-group mb-3">
                     @foreach (var item in Model.BasketItems) {
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">@(ShopItemConstants.ItemMap[item.Value.ItemId].Name)</h6>
-                                <small class="text-muted">Quantity: @item.Value.UnitCount</small>
+                                <h6 class="my-0 basket-item-name">@(ShopItemConstants.ItemMap[item.Value.ItemId].Name)</h6>
+                                <small class="text-muted basket-item-unit-count">Quantity: @item.Value.UnitCount</small>
                             </div>
-                            <span class="text-muted">@($"{item.Value.UnitCost:c}")</span>
+                            <span class="text-muted basket-item-total-cost">@($"{(item.Value.UnitCost * item.Value.UnitCount):c}")</span>
                         </li>
                     }
                     <li class="list-group-item d-flex justify-content-between">
@@ -185,7 +185,14 @@
                     <hr class="my-4">
 
                     <input asp-for="UserId" type="hidden" value="@(userManager.GetUserId(User))" />
-                    <button asp-route="createOrder" class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                    @if (Model.BasketItemCount == 0)
+                    {
+                        <button asp-route="createOrder" disabled class="w-100 btn btn-primary btn-lg" type="submit">Can't Order with 0 Items</button>
+                    }
+                    else
+                    {
+                        <button asp-route="createOrder" class="w-100 btn btn-primary btn-lg" type="submit">Complete Order</button>
+                    }
                 </form>
             </div>
         </div>

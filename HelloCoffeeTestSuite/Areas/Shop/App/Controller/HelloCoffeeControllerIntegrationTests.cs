@@ -76,7 +76,7 @@ public class HelloCoffeeControllerIntegrationTests : PlaywrightTest
             DataObject = requestPayload});
         await Expect(response).ToBeOKAsync();
         
-        Assert.That(response.Url, Is.EqualTo("http://localhost:5128/OrderComplete"));
+        Assert.That(response.Url, Is.EqualTo($"{TestUtils.HelloCoffeeAppEndpoint}/OrderComplete"));
     }
 
     [TearDown]
