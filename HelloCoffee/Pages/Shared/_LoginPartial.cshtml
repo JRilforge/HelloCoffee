@@ -1,8 +1,21 @@
 @using Microsoft.AspNetCore.Identity
 @using HelloCoffee.Areas.Identity.Data
+@using Microsoft.CSharp.RuntimeBinder
 
 @inject SignInManager<HelloCoffeeUser> SignInManager
 @inject UserManager<HelloCoffeeUser> UserManager
+
+@{
+    int basketItemCount;
+    try
+    {
+        basketItemCount = Model.BasketItemCount;
+    }
+    catch (RuntimeBinderException)
+    {
+        basketItemCount = 0;
+    }
+}
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
@@ -12,7 +25,7 @@
     </li>
     <div class="nav-item text-nowrap">
         <a id="checkout-basket-link" class="nav-link px-3" asp-page="/Checkout">
-            <i class="fa-solid fa-basket-shopping"></i> Basket <span class="badge bg-secondary">@(Model.BasketItemCount)</span>
+            <i class="fa-solid fa-basket-shopping"></i> Basket <span class="badge bg-secondary">@(basketItemCount)</span>
         </a>
     </div>
     <li class="nav-item">
