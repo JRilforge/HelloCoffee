@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped(sp => 
     new HttpClient
     {
-        BaseAddress = new Uri("http://localhost:5238")
+        BaseAddress = new Uri($"https://{Environment.GetEnvironmentVariable("HELLO_COFFEE_API_HOST")}")
     });
 
 builder.Services.AddScoped<IShopService, ClientShopService>();

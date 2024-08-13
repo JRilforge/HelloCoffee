@@ -1,20 +1,12 @@
-using HelloCoffee.Data;
-using HelloCoffeeApiClient.Areas.Shop.Data.Dto;
 using HelloCoffeeApiClient.Areas.Shop.Data.Type;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
 
 namespace HelloCoffeeTestSuite.Areas.Shop.App.Page;
 
 // https://terencegolla.com/.net/unit-testing-asp-net-core-identity/
 
 [TestFixture]
-public class HelloCoffeeIntegrationUnitTests : PageTest
+public class HelloCoffeeIntegrationTests : PageTest
 {
     
     [Test]
