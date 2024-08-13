@@ -45,7 +45,8 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish
-        run: dotnet publish -c Release -o ./HelloCoffeeApi/publish
+        working-directory: ./HelloCoffeeApi
+        run: dotnet publish -c Release -o ./publish
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -73,7 +74,8 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish
-        run: dotnet publish -c Release -o ./HelloCoffee/publish
+        working-directory: ./HelloCoffee
+        run: dotnet publish -c Release -o ./publish
 
       - name: Login to Azure
         uses: azure/login@v1
